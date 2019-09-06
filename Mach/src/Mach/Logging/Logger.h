@@ -9,12 +9,19 @@
 #include <io.h>
 #include <fcntl.h>
 #include "..//MachAPI.h"
+#include "LogLine.h"
 
 #ifdef MACH_WINDOWS
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 #endif // MACH_WINDOWS
 
+#define LOG Mach::LogLine(false, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 1).stream()
+#define LOG_INFO Mach::LogLine(false, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 2).stream()
+#define LOG_DEBUG Mach::LogLine(false, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 1).stream()
+#define LOG_WARN Mach::LogLine(false, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 3).stream()
+#define LOG_ERROR Mach::LogLine(false, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 4).stream()
+#define LOG_FATAL Mach::LogLine(false, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 5).stream()
 
 namespace Mach
 {
@@ -31,6 +38,7 @@ namespace Mach
 		static int maxLevel;
 		static bool useLocalTime;
 		static std::string m_Filepath;
+		//LOG_INFO << "";
 	public:
 		static void initialize(LogMode mode, const char* filepath = "");
 		static void log(std::thread::id thread_id, std::string file_name, int line_number, int level, std::string message);
