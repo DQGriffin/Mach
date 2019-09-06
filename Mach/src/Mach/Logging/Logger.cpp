@@ -12,6 +12,7 @@ std::string Mach::Logger::m_Filepath;
 //=================================================================
 void Mach::Logger::initialize(LogMode mode, const char* filepath)
 {
+#ifdef _DEBUG
 	if (!initialized)
 	{
 		m_Mode = mode;
@@ -19,6 +20,8 @@ void Mach::Logger::initialize(LogMode mode, const char* filepath)
 		useLocalTime = false;
 		initializeConsole();
 	}
+#endif // _DEBUG
+
 }
 
 //=================================================================
@@ -26,6 +29,7 @@ void Mach::Logger::initialize(LogMode mode, const char* filepath)
 //=================================================================
 void Mach::Logger::log(std::thread::id thread_id, std::string file_name, int line_number, int level, std::string message)
 {
+#ifdef _DEBUG
 	std::string _timestamp = timestamp();
 	std::string _level = levelToString(level);
 	std::string _log_data = formatLogLine(thread_id, file_name, line_number, message);
@@ -38,6 +42,8 @@ void Mach::Logger::log(std::thread::id thread_id, std::string file_name, int lin
 	{
 		logToFile(_timestamp, _level, _log_data);
 	}
+#endif // _DEBUG
+
 }
 
 //=================================================================
@@ -56,8 +62,7 @@ std::string Mach::Logger::formatLogLine(std::thread::id thread_id, std::string f
 	std::stringstream stream;
 	stream << "[" << thread_id << "] ";
 	stream << "[" << extractFileName(file_name) << "@" << line_number << "] ";
-	stream << message;
-
+	stream << message;	
 	return stream.str();
 }
 

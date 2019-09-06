@@ -16,12 +16,23 @@
 #include <Windows.h>
 #endif // MACH_WINDOWS
 
-#define LOG Mach::LogLine(false, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 1).stream()
+#define LOG Mach::LogLine(false, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 2).stream()
 #define LOG_INFO Mach::LogLine(false, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 2).stream()
 #define LOG_DEBUG Mach::LogLine(false, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 1).stream()
 #define LOG_WARN Mach::LogLine(false, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 3).stream()
 #define LOG_ERROR Mach::LogLine(false, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 4).stream()
 #define LOG_FATAL Mach::LogLine(false, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 5).stream()
+
+#define LOG_IF(boolean_expr) Mach::LogLine(!boolean_expr, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 2).stream()
+#define LOG_INFO_IF(boolean_expr) Mach::LogLine(!boolean_expr, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 2).stream()
+#define LOG_DEBUG_IF(boolean_expr) Mach::LogLine(!boolean_expr, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 1).stream()
+#define LOG_WARN_IF(boolean_expr) Mach::LogLine(!boolean_expr, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 3).stream()
+#define LOG_ERROR_IF(boolean_expr) Mach::LogLine(!boolean_expr, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 4).stream()
+#define LOG_FATAL_IF(boolean_expr) Mach::LogLine(!boolean_expr, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 5).stream()
+
+#ifndef ASSERT(boolean_expr)
+#define ASSERT(boolean_expr) Mach::LogLine(boolean_expr, std::this_thread::get_id(), std::string{__FILE__}, __LINE__, 5).stream()
+#endif // !ASSERT(boolean_expr)
 
 namespace Mach
 {
