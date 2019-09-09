@@ -1,9 +1,10 @@
 #pragma once
 #include <iostream>
+#include "..//MachAPI.h"
 
 namespace Mach {
 	template <class T>
-	class Vector3
+	class MACH_API Vector3
 	{
 	public:
 		T x;
