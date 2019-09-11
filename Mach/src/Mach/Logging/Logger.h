@@ -49,7 +49,6 @@ namespace Mach
 		static int maxLevel;
 		static bool useLocalTime;
 		static std::string m_Filepath;
-		//LOG_INFO << "";
 	public:
 		static void initialize(LogMode mode, const char* filepath = "");
 		static void log(std::thread::id thread_id, std::string file_name, int line_number, int level, std::string message);
