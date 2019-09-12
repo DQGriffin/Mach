@@ -47,6 +47,7 @@ namespace Mach
 			Num7,         // The 7 key
 			Num8,         // The 8 key
 			Num9,         // The 9 key
+			Caps,      // The Caps lock key
 			Escape,       // The Escape key
 			LControl,     // The left Control key
 			LShift,       // The left Shift key
