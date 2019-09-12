@@ -15,7 +15,7 @@ void Mach::EventManager::fireEvent(Mach::Event event)
 //==========================================================================
 bool Mach::EventManager::hasEvents()
 {
-	return events.size > 0;
+	return events.size() != 0;
 }
 
 //==========================================================================
