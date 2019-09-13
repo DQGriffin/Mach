@@ -27,6 +27,7 @@ namespace Mach
 		union
 		{
 			KeyEvent keyEvent;
+			MouseClickEvent mouseClickEvent;
 		};
 	};
 }
