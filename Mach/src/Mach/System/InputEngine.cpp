@@ -75,9 +75,18 @@ void Mach::InputEngine::pollMouseInput()
 	if (previousMousePosition.x != static_cast<int>(position.x)|| previousMousePosition.y != static_cast<int>(position.y))
 	{
 		// The mouse has moved, fire and event
+		Event event;
+		event.type = Event::Type::MouseMoveEvent;
+		event.mouseMoveEvent.x = position.x;
+		event.mouseMoveEvent.y = position.y;
+		event.mouseMoveEvent.horizontalDelta = position.x - previousMousePosition.x;
+		event.mouseMoveEvent.verticalDelta = position.y - previousMousePosition.y;
+		EventManager::fireEvent(event);
+
+		// Set previous position to current position
 		previousMousePosition.x = position.x;
 		previousMousePosition.y = position.y;
-		LOG << "Mouse moving";
+		LOG << "Mouse moving | X-Delta: " << event.mouseMoveEvent.horizontalDelta << ", Y-Delta: " << event.mouseMoveEvent.verticalDelta;
 	}
 }
 
