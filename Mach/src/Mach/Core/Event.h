@@ -8,7 +8,7 @@ namespace Mach
 	class MACH_API Event
 	{
 	public:
-		enum class Type{KeyEvent, MouseClickEvent};
+		enum class Type{KeyEvent, MouseClickEvent, MouseMoveEvent};
 
 		Type type;
 
@@ -18,16 +18,25 @@ namespace Mach
 		};
 
 		struct MouseClickEvent
-		{
-			Mouse::Button button;
+		{			
+			Mouse::Button button;			
 			int x;
 			int y;
+		};
+
+		struct MouseMoveEvent
+		{
+			int x;
+			int y;
+			int horizontalDelta;
+			int verticalDelta;
 		};
 
 		union
 		{
 			KeyEvent keyEvent;
 			MouseClickEvent mouseClickEvent;
+			MouseMoveEvent mouseMoveEvent;
 		};
 	};
 }
