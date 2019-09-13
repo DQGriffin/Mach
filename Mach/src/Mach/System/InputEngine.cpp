@@ -8,6 +8,7 @@ Mach::InputEngine::InputEngine(int tickRate)
 	this->tickRate = tickRate;
 	isPolling = true;
 	initializeKeyMap();
+	initializeMouseButtonMap();
 }
 
 //==========================================================================
@@ -49,6 +50,18 @@ void Mach::InputEngine::pollKeysDown()
 //==========================================================================
 void Mach::InputEngine::pollMouseInput()
 {
+	std::map<Mouse::Button, int>::iterator iterator = mouseButtonMap.begin();
+
+	while (iterator != mouseButtonMap.end())
+	{
+		if (GetKeyState(iterator->second) & 0x8000)
+		{
+			POINT position;
+			GetCursorPos(&position);
+			LOG << "Mouse clicked: " << position.x << ", " << position.y;
+		}
+		iterator++;
+	}
 }
 
 //==========================================================================
@@ -60,6 +73,7 @@ void Mach::InputEngine::poll()
 	{
 		//LOG << "Input Engine polling";
 		pollKeyInput();
+		pollMouseInput();
 		std::this_thread::sleep_for(std::chrono::milliseconds(tickRate));
 	}
 }
@@ -167,4 +181,17 @@ void Mach::InputEngine::initializeKeyMap()
 	keyMap[Keyboard::Key::Subtract] = VK_SUBTRACT;
 	keyMap[Keyboard::Key::Add] = VK_ADD;
 	keyMap[Keyboard::Key::Period] = VK_OEM_PERIOD;
+}
+
+//==========================================================================
+// Initialize the mouse button map
+// See pollMouseInput()
+//==========================================================================
+void Mach::InputEngine::initializeMouseButtonMap()
+{
+	mouseButtonMap[Mouse::Button::LeftButton] = VK_LBUTTON;
+	mouseButtonMap[Mouse::Button::RightButton] = VK_RBUTTON;
+	mouseButtonMap[Mouse::Button::MiddleButton] = VK_MBUTTON;
+	mouseButtonMap[Mouse::Button::Extra1] = VK_XBUTTON1;
+	mouseButtonMap[Mouse::Button::Extra2] = VK_XBUTTON2;
 }

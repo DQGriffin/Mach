@@ -4,8 +4,9 @@
 #include <map>
 #include "..//MachAPI.h"
 #include "..//Logging/Logger.h"
-#include "Keyboard.h"
 #include "..//Core/EventManager.h"
+#include "Keyboard.h"
+#include "Mouse.h"
 
 #if MACH_WINDOWS
 	#include <Windows.h>
@@ -19,6 +20,7 @@ namespace Mach
 	private:
 		std::vector<Keyboard::Key> keysDown;		
 		std::map<Keyboard::Key, int> keyMap;
+		std::map<Mouse::Button, int> mouseButtonMap;
 		int tickRate; // The update rate in ms
 		bool isPolling;
 	public:
@@ -31,6 +33,6 @@ namespace Mach
 	private:
 		void isKeyPressed();
 		void initializeKeyMap();
-		void initializeKeyMapN();
+		void initializeMouseButtonMap();
 	};
 }
