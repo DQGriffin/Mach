@@ -7,6 +7,8 @@ Mach::InputEngine::InputEngine(int tickRate)
 {
 	this->tickRate = tickRate;
 	isPolling = true;
+	previousMousePosition.x = 0;
+	previousMousePosition.y = 0;
 	initializeKeyMap();
 	initializeMouseButtonMap();
 }
@@ -58,9 +60,24 @@ void Mach::InputEngine::pollMouseInput()
 		{
 			POINT position;
 			GetCursorPos(&position);
+			Event event;
+			event.type = Event::Type::MouseClickEvent;
+			event.mouseClickEvent.button = iterator->first;
+			event.mouseClickEvent.x = position.x;
+			event.mouseClickEvent.y = position.y;
 			LOG << "Mouse clicked: " << position.x << ", " << position.y;
 		}
 		iterator++;
+	}
+
+	POINT position;
+	GetCursorPos(&position);
+	if (previousMousePosition.x != static_cast<int>(position.x)|| previousMousePosition.y != static_cast<int>(position.y))
+	{
+		// The mouse has moved, fire and event
+		previousMousePosition.x = position.x;
+		previousMousePosition.y = position.y;
+		LOG << "Mouse moving";
 	}
 }
 

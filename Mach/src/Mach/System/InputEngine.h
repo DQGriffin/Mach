@@ -5,6 +5,7 @@
 #include "..//MachAPI.h"
 #include "..//Logging/Logger.h"
 #include "..//Core/EventManager.h"
+#include "Vector2.h"
 #include "Keyboard.h"
 #include "Mouse.h"
 
@@ -23,6 +24,7 @@ namespace Mach
 		std::map<Mouse::Button, int> mouseButtonMap;
 		int tickRate; // The update rate in ms
 		bool isPolling;
+		Vector2i previousMousePosition;
 	public:
 		InputEngine(int tickRate = 80);
 		void pollInput();
