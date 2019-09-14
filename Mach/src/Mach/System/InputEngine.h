@@ -28,13 +28,13 @@ namespace Mach
 	public:
 		InputEngine(int tickRate = 80);
 		void pollInput();
-		void pollKeyInput();
-		void pollKeysDown();
+		void pollKeyInput();		
 		void pollMouseInput();
 		void poll();
 	private:
-		void isKeyPressed();
 		void initializeKeyMap();
 		void initializeMouseButtonMap();
+		void setKeyDown(Keyboard::Key key);
+		bool keyDown(Keyboard::Key key);
 	};
 }

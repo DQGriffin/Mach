@@ -32,19 +32,27 @@ void Mach::InputEngine::pollKeyInput()
 	{
 		if (GetKeyState(iterator->second) & 0x8000)
 		{
-			LOG << "Key pressed";
+			LOG << "Key pressed";			
+			setKeyDown(iterator->first);
 			Event event;
 			event.keyEvent.key = iterator->first;
-			event.type = Event::Type::KeyEvent;
+			event.type = Event::Type::KeyPressedEvent;
 			EventManager::fireEvent(event);
 		}
 		iterator++;
 	}
-#endif;
-}
 
-void Mach::InputEngine::pollKeysDown()
-{
+	// Check to see if keys have been released
+	for (int i = 0; i < keysDown.size(); i++)
+	{
+		if (!(GetKeyState(keyMap[keysDown[i]]) & 0x8000))
+		{
+			LOG << "Key released";
+			keysDown.erase(keysDown.begin() + i);
+			// TODO: Register and event here
+		}
+	}
+#endif;
 }
 
 //==========================================================================
@@ -220,4 +228,31 @@ void Mach::InputEngine::initializeMouseButtonMap()
 	mouseButtonMap[Mouse::Button::MiddleButton] = VK_MBUTTON;
 	mouseButtonMap[Mouse::Button::Extra1] = VK_XBUTTON1;
 	mouseButtonMap[Mouse::Button::Extra2] = VK_XBUTTON2;
+}
+
+//==========================================================================
+// Add the given key to the std::vector of currently down keys, provided
+// it is not already in the vector
+//==========================================================================
+void Mach::InputEngine::setKeyDown(Keyboard::Key key)
+{
+	if (!keyDown(key))
+	{
+		keysDown.push_back(key);
+	}
+}
+
+//==========================================================================
+// Query whether or not the given key is down
+//==========================================================================
+bool Mach::InputEngine::keyDown(Keyboard::Key key)
+{
+	for (Keyboard::Key currentKey : keysDown)
+	{
+		if (currentKey == key)
+		{
+			return true;
+		}
+	}
+	return false;
 }
