@@ -5,7 +5,7 @@
 
 namespace Mach
 {
-	class Mouse
+	class MACH_API Mouse
 	{
 	public:
 		static enum Button { LeftButton, RightButton, MiddleButton, Extra1, Extra2 };
