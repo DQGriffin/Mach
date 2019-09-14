@@ -17,6 +17,11 @@ namespace Mach
 			Keyboard::Key key;
 		};
 
+		struct KeyReleasedEvent
+		{
+			Keyboard::Key key;
+		};
+
 		struct MouseClickEvent
 		{			
 			Mouse::Button button;			
@@ -35,6 +40,7 @@ namespace Mach
 		union
 		{
 			KeyEvent keyEvent;
+			KeyReleasedEvent keyReleasedEvent;
 			MouseClickEvent mouseClickEvent;
 			MouseMoveEvent mouseMoveEvent;
 		};
