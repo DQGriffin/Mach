@@ -16,8 +16,15 @@ Mach::InputEngine::InputEngine(int tickRate)
 //==========================================================================
 // Poll for input
 //==========================================================================
-void Mach::InputEngine::pollInput()
+void Mach::InputEngine::poll()
 {
+	while (isPolling)
+	{
+		//LOG << "Input Engine polling";
+		pollKeyInput();
+		pollMouseInput();
+		std::this_thread::sleep_for(std::chrono::milliseconds(tickRate));
+	}
 }
 
 //==========================================================================
@@ -95,20 +102,6 @@ void Mach::InputEngine::pollMouseInput()
 		previousMousePosition.x = position.x;
 		previousMousePosition.y = position.y;
 		LOG << "Mouse moving | X-Delta: " << event.mouseMoveEvent.horizontalDelta << ", Y-Delta: " << event.mouseMoveEvent.verticalDelta;
-	}
-}
-
-//==========================================================================
-// Poll for input
-//==========================================================================
-void Mach::InputEngine::poll()
-{
-	while (isPolling)
-	{
-		//LOG << "Input Engine polling";
-		pollKeyInput();
-		pollMouseInput();
-		std::this_thread::sleep_for(std::chrono::milliseconds(tickRate));
 	}
 }
 

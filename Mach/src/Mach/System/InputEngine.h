@@ -26,8 +26,7 @@ namespace Mach
 		bool isPolling;
 		Vector2i previousMousePosition;
 	public:
-		InputEngine(int tickRate = 80);
-		void pollInput();
+		InputEngine(int tickRate = 80);		
 		void pollKeyInput();		
 		void pollMouseInput();
 		void poll();
