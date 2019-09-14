@@ -20,7 +20,6 @@ void Mach::InputEngine::poll()
 {
 	while (isPolling)
 	{
-		//LOG << "Input Engine polling";
 		pollKeyInput();
 		pollMouseInput();
 		std::this_thread::sleep_for(std::chrono::milliseconds(tickRate));
@@ -38,8 +37,7 @@ void Mach::InputEngine::pollKeyInput()
 	while (iterator != keyMap.end())
 	{
 		if (GetKeyState(iterator->second) & 0x8000)
-		{
-			LOG << "Key pressed";			
+		{			
 			setKeyDown(iterator->first);
 			Event event;
 			event.keyEvent.key = iterator->first;
@@ -53,8 +51,7 @@ void Mach::InputEngine::pollKeyInput()
 	for (int i = 0; i < keysDown.size(); i++)
 	{
 		if (!(GetKeyState(keyMap[keysDown[i]]) & 0x8000))
-		{
-			LOG << "Key released";
+		{			
 			keysDown.erase(keysDown.begin() + i);
 			// TODO: Register and event here
 		}
@@ -79,8 +76,7 @@ void Mach::InputEngine::pollMouseInput()
 			event.type = Event::Type::MouseClickEvent;
 			event.mouseClickEvent.button = iterator->first;
 			event.mouseClickEvent.x = position.x;
-			event.mouseClickEvent.y = position.y;
-			LOG << "Mouse clicked: " << position.x << ", " << position.y;
+			event.mouseClickEvent.y = position.y;			
 		}
 		iterator++;
 	}
@@ -100,8 +96,7 @@ void Mach::InputEngine::pollMouseInput()
 
 		// Set previous position to current position
 		previousMousePosition.x = position.x;
-		previousMousePosition.y = position.y;
-		LOG << "Mouse moving | X-Delta: " << event.mouseMoveEvent.horizontalDelta << ", Y-Delta: " << event.mouseMoveEvent.verticalDelta;
+		previousMousePosition.y = position.y;		
 	}
 }
 
