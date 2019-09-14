@@ -76,7 +76,8 @@ void Mach::InputEngine::pollMouseInput()
 			event.type = Event::Type::MouseClickEvent;
 			event.mouseClickEvent.button = iterator->first;
 			event.mouseClickEvent.x = position.x;
-			event.mouseClickEvent.y = position.y;			
+			event.mouseClickEvent.y = position.y;		
+			EventManager::fireEvent(event);
 		}
 		iterator++;
 	}
