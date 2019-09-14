@@ -53,7 +53,10 @@ void Mach::InputEngine::pollKeyInput()
 		if (!(GetKeyState(keyMap[keysDown[i]]) & 0x8000))
 		{			
 			keysDown.erase(keysDown.begin() + i);
-			// TODO: Register and event here
+			Event event;
+			event.type = Event::Type::KeyReleasedEvent;
+			event.keyReleasedEvent.key = keysDown[i];
+			EventManager::fireEvent(event);
 		}
 	}
 #endif;
