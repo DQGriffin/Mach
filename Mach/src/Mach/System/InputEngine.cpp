@@ -52,10 +52,10 @@ void Mach::InputEngine::pollKeyInput()
 	{
 		if (!(GetKeyState(keyMap[keysDown[i]]) & 0x8000))
 		{			
-			keysDown.erase(keysDown.begin() + i);
 			Event event;
 			event.type = Event::Type::KeyReleasedEvent;
 			event.keyReleasedEvent.key = keysDown[i];
+			keysDown.erase(keysDown.begin() + i);
 			EventManager::fireEvent(event);
 		}
 	}
