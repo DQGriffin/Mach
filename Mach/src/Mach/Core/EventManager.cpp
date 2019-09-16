@@ -27,3 +27,12 @@ Mach::Event Mach::EventManager::getEvent()
 	events.pop();
 	return event;
 }
+
+//==========================================================================
+// Clear all events from the queue
+//==========================================================================
+void Mach::EventManager::clearEvents()
+{
+	std::queue<Event> empty;
+	std::swap(events, empty);
+}
