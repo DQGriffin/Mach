@@ -23,3 +23,23 @@
 ////////////////////////////////////////////////////////////
 
 #pragma once
+#include <SFML/Graphics/Font.hpp>
+#include "..//MachAPI.h"
+#include "..//Logging/Logger.h"
+#include <map>
+#include <string>
+
+namespace Mach
+{
+	class MACH_API FontManager
+	{
+	public:
+	private:
+		static std::map<std::string, sf::Font> m_Fonts;
+	public:
+		static void add(std::string fontName, std::string path);
+		static void remove(std::string fontName);
+		static sf::Font* get(std::string fontName);
+		static bool has(std::string fontName);
+	};
+}
