@@ -45,6 +45,7 @@ namespace Mach
 	public:
 	private:
 		std::vector<Keyboard::Key> keysDown;		
+		std::vector<Mouse::Button> mouseButtonsDown;
 		std::map<Keyboard::Key, int> keyMap;
 		std::map<Mouse::Button, int> mouseButtonMap;
 		int tickRate; // The update rate in ms
@@ -60,5 +61,7 @@ namespace Mach
 		void initializeMouseButtonMap();
 		void setKeyDown(Keyboard::Key key);
 		bool keyDown(Keyboard::Key key);
+		void setMouseButtonDown(Mouse::Button button);
+		bool buttonDown(Mouse::Button button);
 	};
 }

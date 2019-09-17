@@ -69,12 +69,14 @@ void Mach::InputEngine::pollMouseInput()
 {
 	std::map<Mouse::Button, int>::iterator iterator = mouseButtonMap.begin();
 
+	// Query what buttons are down
 	while (iterator != mouseButtonMap.end())
 	{
 		if (GetKeyState(iterator->second) & 0x8000)
 		{
 			POINT position;
 			GetCursorPos(&position);
+			setMouseButtonDown(iterator->first);
 			Event event;
 			event.type = Event::Type::MouseClickEvent;
 			event.mouseClickEvent.button = iterator->first;
@@ -83,6 +85,16 @@ void Mach::InputEngine::pollMouseInput()
 			EventManager::fireEvent(event);
 		}
 		iterator++;
+	}
+
+	// Check to see what buttons have been released
+	for (int i = 0; i < mouseButtonsDown.size(); i++)
+	{
+		if (!(GetKeyState(mouseButtonMap[mouseButtonsDown[i]]) & 0x8000))
+		{
+			LOG << "Mouse button released";
+			mouseButtonsDown.erase(mouseButtonsDown.begin() + i);
+		}
 	}
 
 	POINT position;
@@ -242,6 +254,33 @@ bool Mach::InputEngine::keyDown(Keyboard::Key key)
 	for (Keyboard::Key currentKey : keysDown)
 	{
 		if (currentKey == key)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+//==========================================================================
+// Add the given mouse button to the std::vector of currently down keys, 
+// provided it is not already in the vector
+//==========================================================================
+void Mach::InputEngine::setMouseButtonDown(Mouse::Button button)
+{
+	if (!buttonDown(button))
+	{
+		mouseButtonsDown.push_back(button);
+	}
+}
+
+//==========================================================================
+// Query whether or not the given mouse button is down
+//==========================================================================
+bool Mach::InputEngine::buttonDown(Mouse::Button button)
+{
+	for (Mouse::Button currentButton : mouseButtonsDown)
+	{
+		if (currentButton == button)
 		{
 			return true;
 		}
