@@ -31,24 +31,20 @@ namespace Mach
 {
 	class MACH_API Event
 	{
-	public:
-		enum class Type{KeyPressedEvent, KeyReleasedEvent, MouseClickEvent, MouseButtonReleased, MouseMoveEvent};
-
-		Type type;
-
-		struct KeyPressedEvent
+	private:
+		struct KeyPressed
 		{
 			Keyboard::Key key;
 		};
 
-		struct KeyReleasedEvent
+		struct KeyReleased
 		{
 			Keyboard::Key key;
 		};
 
-		struct MouseClickEvent
-		{			
-			Mouse::Button button;			
+		struct MouseButtonPressed
+		{
+			Mouse::Button button;
 			int x;
 			int y;
 		};
@@ -60,21 +56,26 @@ namespace Mach
 			int y;
 		};
 
-		struct MouseMoveEvent
+		struct MouseMove
 		{
 			int x;
 			int y;
 			int horizontalDelta;
 			int verticalDelta;
 		};
+	public:
+		enum class Type{KeyPressed, KeyReleased, MouseButtonPressed, MouseButtonReleased, MouseMove};
+
+		Type type;
 
 		union
 		{
-			KeyPressedEvent keyEvent;
-			KeyReleasedEvent keyReleasedEvent;
-			MouseClickEvent mouseClickEvent;
+			KeyPressed keyEvent;
+			KeyReleased keyReleasedEvent;
+			MouseButtonPressed mouseClickEvent;
 			MouseButtonReleased mouseButtonReleased;
-			MouseMoveEvent mouseMoveEvent;
+			MouseMove mouseMoveEvent;
 		};
 	};
+
 }
