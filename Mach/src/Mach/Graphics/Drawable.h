@@ -1,15 +1,14 @@
 #pragma once
 #include "..//MachAPI.h"
-#include "Window.h"
 
 namespace Mach
 {
-	class Drawable
+	class MACH_API Drawable
 	{
 	public:
-		virtual ~Drawable(){}
+		virtual ~Drawable() {};
 	protected:
 		friend class Window;
-		virtual void draw(Window& window) {};
+		virtual void draw(Window* window) {};
 	};
 }
