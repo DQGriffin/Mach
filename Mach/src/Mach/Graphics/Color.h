@@ -1,6 +1,7 @@
 #pragma once
 #include "..//MachAPI.h"
 #include <iostream>
+#include <algorithm>
 
 namespace Mach
 {
@@ -23,73 +24,84 @@ namespace Mach
 	private:
 	public:
 		Color();
+
 		Color(int r, int g, int b, int a = 255);
 	};
 
-	Color operator+(const Color& left, const Color& right)
+	inline
+	Mach::Color operator+(const Mach::Color& left, const Mach::Color& right)
 	{
-		Color result;
-		result.r = left.r + right.r;
-		result.g = left.g + right.g;
-		result.b = left.b + right.b;		
+		Mach::Color result;
+		result.r = std::min(left.r + right.r, 255);
+		result.g = std::min(left.g + right.g, 255);
+		result.b = std::min(left.b + right.b, 255);
 		return result;
 	}
 
-	Color operator-(const Color& left, const Color& right)
+	inline
+	Mach::Color operator-(const Mach::Color& left, const Mach::Color& right)
 	{
-		Color result;
-		result.r = left.r - right.r;
-		result.g = left.g - right.g;
-		result.b = left.b - right.b;		
+		Mach::Color result;
+		result.r = std::max(left.r - right.r, 0);
+		result.g = std::max(left.g - right.g, 0);
+		result.b = std::max(left.b - right.b, 0);
 		return result;
 	}
 
-	Color operator*(const Color& left, const Color& right)
+	inline
+	Mach::Color operator*(const Mach::Color& left, const Mach::Color& right)
 	{
-		Color result;
-		result.r = left.r * right.r;
-		result.g = left.g * right.g;
-		result.b = left.b * right.b;		
+		Mach::Color result;
+		result.r = std::min(left.r * right.r, 255);
+		result.g = std::min(left.g * right.g, 255);
+		result.b = std::min(left.b * right.b, 255);
 		return result;
 	}
 
-	Color& operator+=(Color& left, const Color& right)
+	inline
+	Mach::Color& operator+=(Mach::Color& left, const Mach::Color& right)
 	{
-		left.r += right.r;
-		left.g += right.g;
-		left.b += right.b;
+		left.r = std::min(left.r + right.r, 255);
+		left.g = std::min(left.g + right.g, 255);
+		left.b = std::min(left.b + right.b, 255);
 		return left;
 	}
 
-	Color& operator-=(Color& left, const Color& right)
+	inline
+	Mach::Color& operator-=(Mach::Color& left, const Mach::Color& right)
 	{
-		left.r -= right.r;
-		left.g -= right.g;
-		left.b -= right.b;
+		left.r = std::max(left.r - right.r, 0);
+		left.g = std::max(left.g - right.g, 0);
+		left.b = std::max(left.b - right.b, 0);
 		return left;
 	}
 
-	Color& operator*=(Color& left, const Color& right)
+	inline
+	Mach::Color& operator*=(Mach::Color& left, const Mach::Color& right)
 	{
-		left.r *= right.r;
-		left.g *= right.g;
-		left.b *= right.b;
+		left.r = std::min(left.r * right.r, 255);
+		left.g = std::min(left.g * right.g, 255);
+		left.b = std::min(left.b * right.b, 255);
 		return left;
 	}
 
-	bool operator==(const Color& left, const Color& right)
-	{
-		return (left.r == right.r) && (left.g == right.g) && (left.b == right.b) && (left.a == right.a);
-	}
-
-	bool operator!=(const Color& left, const Color& right)
-	{
-		return !operator==(left, right);
-	}
-
-	std::ostream& operator<<(std::ostream& os, const Color& color)
+	inline
+	std::ostream& operator<<(std::ostream& os, const Mach::Color& color)
 	{
 		os << "Color: [" << color.r << ", " << color.g << ", " << color.b << ", " << color.a << "]";
 		return os;
 	}
+
+	inline
+	bool operator==(const Mach::Color& left, const Mach::Color& right)
+	{
+		return (left.r == right.r) && (left.g == right.g) && (left.b == right.b) && (left.a == right.a);
+	}
+
+	inline
+	bool operator!=(const Mach::Color& left, const Mach::Color& right)
+	{
+		return !operator==(left, right);
+	}
+
 }
