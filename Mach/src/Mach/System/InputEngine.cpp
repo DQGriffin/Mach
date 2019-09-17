@@ -91,9 +91,17 @@ void Mach::InputEngine::pollMouseInput()
 	for (int i = 0; i < mouseButtonsDown.size(); i++)
 	{
 		if (!(GetKeyState(mouseButtonMap[mouseButtonsDown[i]]) & 0x8000))
-		{
-			LOG << "Mouse button released";
+		{			
+			//LOG << "Mouse button released";
+			POINT position;
+			GetCursorPos(&position);
+			Event event;
+			event.type = Event::Type::MouseButtonReleased;
+			event.mouseButtonReleased.button = mouseButtonsDown[i];
+			event.mouseButtonReleased.x = position.x;
+			event.mouseButtonReleased.y = position.y;
 			mouseButtonsDown.erase(mouseButtonsDown.begin() + i);
+			EventManager::fireEvent(event);
 		}
 	}
 
