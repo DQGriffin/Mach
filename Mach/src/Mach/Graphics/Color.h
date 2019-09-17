@@ -1,5 +1,6 @@
 #pragma once
 #include "..//MachAPI.h"
+#include <iostream>
 
 namespace Mach
 {
@@ -84,5 +85,11 @@ namespace Mach
 	bool operator!=(const Color& left, const Color& right)
 	{
 		return !operator==(left, right);
+	}
+
+	std::ostream& operator<<(std::ostream& os, const Color& color)
+	{
+		os << "Color: [" << color.r << ", " << color.g << ", " << color.b << ", " << color.a << "]";
+		return os;
 	}
 }
