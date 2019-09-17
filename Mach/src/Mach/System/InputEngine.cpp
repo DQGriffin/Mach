@@ -41,7 +41,7 @@ void Mach::InputEngine::pollKeyInput()
 			setKeyDown(iterator->first);
 			Event event;
 			event.keyEvent.key = iterator->first;
-			event.type = Event::Type::KeyPressedEvent;
+			event.type = Event::Type::KeyPressed;
 			EventManager::fireEvent(event);
 		}
 		iterator++;
@@ -53,7 +53,7 @@ void Mach::InputEngine::pollKeyInput()
 		if (!(GetKeyState(keyMap[keysDown[i]]) & 0x8000))
 		{			
 			Event event;
-			event.type = Event::Type::KeyReleasedEvent;
+			event.type = Event::Type::KeyReleased;
 			event.keyReleasedEvent.key = keysDown[i];
 			keysDown.erase(keysDown.begin() + i);
 			EventManager::fireEvent(event);
@@ -78,7 +78,7 @@ void Mach::InputEngine::pollMouseInput()
 			GetCursorPos(&position);
 			setMouseButtonDown(iterator->first);
 			Event event;
-			event.type = Event::Type::MouseClickEvent;
+			event.type = Event::Type::MouseButtonPressed;
 			event.mouseClickEvent.button = iterator->first;
 			event.mouseClickEvent.x = position.x;
 			event.mouseClickEvent.y = position.y;		
@@ -111,7 +111,7 @@ void Mach::InputEngine::pollMouseInput()
 	{
 		// The mouse has moved, fire and event
 		Event event;
-		event.type = Event::Type::MouseMoveEvent;
+		event.type = Event::Type::MouseMove;
 		event.mouseMoveEvent.x = position.x;
 		event.mouseMoveEvent.y = position.y;
 		event.mouseMoveEvent.horizontalDelta = position.x - previousMousePosition.x;
