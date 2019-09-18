@@ -3,6 +3,7 @@
 #include "..//MachAPI.h"
 #include "..//Logging/Logger.h"
 #include "Drawable.h"
+#include "RenderGroup.h"
 
 namespace Mach
 {
@@ -16,6 +17,7 @@ namespace Mach
 		static void initialize(sf::RenderWindow* renderWindow);
 		static void clear();
 		static void render(Mach::Drawable& drawable);
+		static void render(Mach::RenderGroup& renderGroup);
 		static void display();
 	};
 }
