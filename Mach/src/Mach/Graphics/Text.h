@@ -26,12 +26,14 @@
 #include "..//MachAPI.h"
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include "..//System/Vector2.h"
 #include "Drawable.h"
 #include "Color.h"
 #include "Font.h"
 #include "FontManager.h"
 #include "Window.h"
+#include "..//Core/Application.h"
 #include <string>
 
 namespace Mach
@@ -58,7 +60,7 @@ namespace Mach
 		Mach::Vector2i getPosition() const;
 		std::string getString();
 		std::string getString() const;
-		void draw(Mach::Window* window) override;
+		void draw(sf::RenderWindow* window) override;
 	private:
 		void update();
 	};
