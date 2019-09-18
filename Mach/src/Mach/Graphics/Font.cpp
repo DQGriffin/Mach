@@ -5,7 +5,7 @@
 //==========================================================================
 Mach::Font::Font()
 {
-	
+	m_IsValid = false;
 }
 
 //==========================================================================
@@ -15,7 +15,11 @@ Mach::Font::Font(std::string path)
 {
 	if (!m_Font.loadFromFile(path))
 	{
-		LOG_WARN << "Failed to load font";
+		m_IsValid = false;
+	}
+	else
+	{
+		m_IsValid = true;
 	}
 }
 
@@ -25,4 +29,12 @@ Mach::Font::Font(std::string path)
 sf::Font* Mach::Font::get()
 {
 	return &m_Font;
+}
+
+//==========================================================================
+// Query whether or not the Font object contains a valid font
+//==========================================================================
+bool Mach::Font::isValid()
+{
+	return m_IsValid;
 }

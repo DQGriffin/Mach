@@ -23,9 +23,9 @@
 ////////////////////////////////////////////////////////////
 
 #pragma once
+#include <SFML/Graphics/Font.hpp>
 #include "..//MachAPI.h""
 #include "..//Logging/Logger.h"
-#include <SFML/Graphics/Font.hpp>
 #include <string>
 
 namespace Mach
@@ -35,9 +35,11 @@ namespace Mach
 	public:
 	private:
 		sf::Font m_Font;
+		bool m_IsValid;
 	public:
 		Font();
 		Font(std::string path);
 		sf::Font* get();
+		bool isValid();
 	};
 }
