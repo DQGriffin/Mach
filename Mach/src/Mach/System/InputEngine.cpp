@@ -48,7 +48,7 @@ void Mach::InputEngine::pollKeyInput()
 	}
 
 	// Check to see if keys have been released
-	for (int i = 0; i < keysDown.size(); i++)
+	for (unsigned int i = 0; i < keysDown.size(); i++)
 	{
 		if (!(GetKeyState(keyMap[keysDown[i]]) & 0x8000))
 		{			
@@ -88,7 +88,7 @@ void Mach::InputEngine::pollMouseInput()
 	}
 
 	// Check to see what buttons have been released
-	for (int i = 0; i < mouseButtonsDown.size(); i++)
+	for (unsigned int i = 0; i < mouseButtonsDown.size(); i++)
 	{
 		if (!(GetKeyState(mouseButtonMap[mouseButtonsDown[i]]) & 0x8000))
 		{			
