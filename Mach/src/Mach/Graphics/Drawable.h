@@ -28,6 +28,7 @@
 namespace Mach
 {
 	class Window;
+	class Renderer;
 
 	class MACH_API Drawable
 	{
@@ -35,6 +36,7 @@ namespace Mach
 		virtual ~Drawable() {};
 	protected:
 		friend class Window;
-		virtual void draw(Mach::Window* window) {};
+		friend class Renderer;
+		virtual void draw(sf::RenderWindow* window) =0;
 	};
 }
