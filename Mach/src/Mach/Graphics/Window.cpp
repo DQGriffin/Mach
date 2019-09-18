@@ -97,3 +97,11 @@ void Mach::Window::setPosition(Vector2i position)
 	m_Position = position;
 	revalidate();
 }
+
+//==========================================================================
+// Draw a drawable to the window
+//==========================================================================
+void Mach::Window::draw(Mach::Drawable& drawable)
+{
+	drawable.draw(&m_RenderWindow);
+}

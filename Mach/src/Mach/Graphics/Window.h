@@ -38,6 +38,8 @@ namespace Mach
 		Vector2i m_Size;
 		Vector2i m_Position;
 		std::string m_Title;
+	protected:
+		friend class Drawable;
 		sf::RenderWindow m_RenderWindow;		
 	public:
 		Window();
