@@ -74,10 +74,42 @@ void Mach::Text::setColor(Mach::Color color)
 }
 
 //==========================================================================
+// Get the text's position as a Mach::Vector2
+//==========================================================================
+Mach::Vector2i Mach::Text::getPosition()
+{
+	return m_Position;
+}
+
+//==========================================================================
+// Get the text's position as a Mach::Vector2
+//==========================================================================
+Mach::Vector2i Mach::Text::getPosition() const
+{
+	return m_Position;
+}
+
+//==========================================================================
+// Get an std::string representing the text
+//==========================================================================
+std::string Mach::Text::getString()
+{
+	return m_String;
+}
+
+//==========================================================================
+// Get an std::string representing the text
+//==========================================================================
+std::string Mach::Text::getString() const
+{
+	return m_String;
+}
+
+//==========================================================================
 // Draw the text to the window
 //==========================================================================
 void Mach::Text::draw(Mach::Window* window)
-{
+{	
 	LOG_WARN << "Drawing has not yet been implemented";
 }
 

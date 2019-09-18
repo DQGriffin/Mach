@@ -54,6 +54,10 @@ namespace Mach
 		void setPosition(Vector2i position);
 		void setFont(Mach::Font* font);
 		void setColor(Mach::Color color);
+		Mach::Vector2i getPosition();
+		Mach::Vector2i getPosition() const;
+		std::string getString();
+		std::string getString() const;
 		void draw(Mach::Window* window) override;
 	private:
 		void update();
