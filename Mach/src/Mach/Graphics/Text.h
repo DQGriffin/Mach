@@ -24,9 +24,15 @@
 
 #pragma once
 #include "..//MachAPI.h"
+#include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/Font.hpp>
 #include "..//System/Vector2.h"
 #include "Drawable.h"
 #include "Color.h"
+#include "Font.h"
+#include "FontManager.h"
+#include "Window.h"
+#include <string>
 
 namespace Mach
 {
@@ -36,6 +42,20 @@ namespace Mach
 	private:
 		Vector2i m_Position;
 		int m_FontSize;
-		
+		Color m_Color;
+		sf::Text m_TextObject;
+		Mach::Font* m_Font;
+		std::string m_String;
+	public:
+		Text();
+		Text(int x, int y, std::string text, Mach::Font* font, int fontSize, Mach::Color color = Mach::Color::WHITE);
+		Text(int x, int y, const char* text, Mach::Font* font, int fontSize, Mach::Color color = Mach::Color::WHITE);
+		void setPosition(int x, int y);
+		void setPosition(Vector2i position);
+		void setFont(Mach::Font* font);
+		void setColor(Mach::Color color);
+		void draw(Mach::Window* window) override;
+	private:
+		void update();
 	};
 }
