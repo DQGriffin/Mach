@@ -26,6 +26,7 @@
 #include <SFML/Graphics/Font.hpp>
 #include "..//MachAPI.h"
 #include "..//Logging/Logger.h"
+#include "Font.h"
 #include <map>
 #include <string>
 
@@ -35,11 +36,11 @@ namespace Mach
 	{
 	public:
 	private:
-		static std::map<std::string, sf::Font> m_Fonts;
+		static std::map<std::string, Mach::Font> m_Fonts;
 	public:
 		static void add(std::string fontName, std::string path);
 		static void remove(std::string fontName);
-		static sf::Font* get(std::string fontName);
+		static Mach::Font* get(std::string fontName);
 		static bool has(std::string fontName);
 	};
 }

@@ -1,14 +1,16 @@
 #include "FontManager.h"
 
-std::map<std::string, sf::Font> Mach::FontManager::m_Fonts;
+std::map<std::string, Mach::Font> Mach::FontManager::m_Fonts;
 
 //==========================================================================
 // Add a font to the font registry
 //==========================================================================
 void Mach::FontManager::add(std::string fontName, std::string path)
 {
-	sf::Font font;
-	if (font.loadFromFile(path))
+
+	Mach::Font font{ path };
+
+	if (font.isValid())
 	{
 		LOG << "Font \"" << fontName << "\" loaded successfully";
 		m_Fonts[fontName] = font;
@@ -24,7 +26,7 @@ void Mach::FontManager::add(std::string fontName, std::string path)
 //==========================================================================
 void Mach::FontManager::remove(std::string fontName)
 {
-	std::map<std::string, sf::Font>::iterator it = m_Fonts.begin();
+	std::map<std::string, Mach::Font>::iterator it = m_Fonts.begin();
 
 	while (it != m_Fonts.end())
 	{
@@ -39,7 +41,7 @@ void Mach::FontManager::remove(std::string fontName)
 //==========================================================================
 // Get a given font
 //==========================================================================
-sf::Font* Mach::FontManager::get(std::string fontName)
+Mach::Font* Mach::FontManager::get(std::string fontName)
 {
 	if (has(fontName))
 	{
@@ -53,7 +55,7 @@ sf::Font* Mach::FontManager::get(std::string fontName)
 //==========================================================================
 bool Mach::FontManager::has(std::string fontName)
 {
-	std::map<std::string, sf::Font>::iterator it = m_Fonts.begin();
+	std::map<std::string, Mach::Font>::iterator it = m_Fonts.begin();
 
 	while (it != m_Fonts.end())
 	{
