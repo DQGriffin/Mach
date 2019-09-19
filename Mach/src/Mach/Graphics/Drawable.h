@@ -24,6 +24,7 @@
 
 #pragma once
 #include "..//MachAPI.h"
+#include <SFML/Graphics/RenderWindow.hpp>
 
 namespace Mach
 {
