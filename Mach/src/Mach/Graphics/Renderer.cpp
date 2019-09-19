@@ -34,9 +34,9 @@ void Mach::Renderer::render(Mach::Drawable& drawable)
 //==========================================================================
 void Mach::Renderer::render(Mach::RenderGroup& renderGroup)
 {
-	for (Drawable& drawable : renderGroup.m_Drawables)
+	for (Drawable* drawable : renderGroup.m_Drawables)
 	{
-		drawable.draw(m_RenderWindow);
+		drawable->draw(m_RenderWindow);
 	}
 }
 
