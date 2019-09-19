@@ -1,7 +1,6 @@
 #pragma once
 #include "..//MachAPI.h"
 #include "Drawable.h"
-#include "Renderer.h";
 #include <vector>
 
 namespace Mach
@@ -10,7 +9,7 @@ namespace Mach
 	{
 	private:
 		friend class Renderer;
-		std::vector<Drawable&> m_Drawables;
+		std::vector<Drawable*> m_Drawables;
 	public:
 		RenderGroup();
 		void add(Drawable& drawable);

@@ -5,5 +5,5 @@
 //==========================================================================
 void Mach::RenderGroup::add(Drawable& drawable)
 {
-	m_Drawables.push_back(drawable);
+	m_Drawables.push_back(&drawable);
 }
