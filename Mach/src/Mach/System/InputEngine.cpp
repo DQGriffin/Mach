@@ -40,7 +40,7 @@ void Mach::InputEngine::pollKeyInput()
 		{			
 			setKeyDown(iterator->first);
 			Event event;
-			event.keyEvent.key = iterator->first;
+			event.keyPressedEvent.key = iterator->first;
 			event.type = Event::Type::KeyPressed;
 			EventManager::fireEvent(event);
 		}
