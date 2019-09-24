@@ -44,6 +44,16 @@ Mach::Window::Window(int x, int y, int width, int height, const char* title)
 }
 
 //==========================================================================
+// Copy assignment
+//==========================================================================
+void Mach::Window::operator=(const Mach::Window& other)
+{
+	m_Position = other.m_Position;
+	m_Size = other.m_Size;
+	m_Title = other.m_Title;
+}
+
+//==========================================================================
 // Create (or recreate) the window
 //==========================================================================
 void Mach::Window::revalidate()
@@ -104,4 +114,26 @@ void Mach::Window::setPosition(Vector2i position)
 void Mach::Window::draw(Mach::Drawable& drawable)
 {
 	drawable.draw(&m_RenderWindow);
+}
+
+void Mach::Window::update()
+{
+	// For debug purposes
+	sf::CircleShape shape(5.f);
+	shape.setFillColor(sf::Color::Green);
+
+	if (m_RenderWindow.isOpen())
+	{
+		sf::Event event;
+
+		while (m_RenderWindow.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+			{
+				// The window is closing
+			}
+		}
+
+		m_RenderWindow.draw(shape);
+	}
 }
