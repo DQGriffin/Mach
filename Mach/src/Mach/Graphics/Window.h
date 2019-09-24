@@ -24,6 +24,8 @@
 
 #pragma once
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Window/Event.hpp>
+#include <SFML/Graphics/CircleShape.hpp>
 #include "..//MachAPI.h"
 #include "..//Logging/Logger.h"
 #include "..//System/Vector2.h"
@@ -40,12 +42,14 @@ namespace Mach
 		std::string m_Title;
 	protected:
 		friend class Drawable;
+		friend class Application;
 		sf::RenderWindow m_RenderWindow;		
 	public:
 		Window();
 		Window(int x, int y, int width, int height);
 		Window(int x, int y, int width, int height, std::string title);
 		Window(int x, int y, int width, int height, const char* title);
+		void operator=(const Mach::Window& other);
 		void revalidate();
 		void setVsyncEnabled(bool enabled);
 		void setSize(int x, int y);
@@ -53,6 +57,7 @@ namespace Mach
 		void setPosition(int x, int y);
 		void setPosition(Vector2i position);
 		void draw(Drawable& drawable);
+		void update();
 	private:
 	};
 }
