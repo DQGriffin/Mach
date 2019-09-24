@@ -63,18 +63,24 @@ namespace Mach
 			int horizontalDelta;
 			int verticalDelta;
 		};
+
+		struct Exit
+		{
+			int code;
+		};
 	public:
-		enum class Type{KeyPressed, KeyReleased, MouseButtonPressed, MouseButtonReleased, MouseMove};
+		enum class Type{KeyPressed, KeyReleased, MouseButtonPressed, MouseButtonReleased, MouseMove, Exit};
 
 		Type type;
 
 		union
 		{
-			KeyPressed keyEvent;
+			KeyPressed keyPressedEvent;
 			KeyReleased keyReleasedEvent;
 			MouseButtonPressed mouseClickEvent;
 			MouseButtonReleased mouseButtonReleased;
 			MouseMove mouseMoveEvent;
+			Exit exit;
 		};
 	};
 
