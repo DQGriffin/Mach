@@ -30,6 +30,8 @@
 #include "..//Logging/Logger.h"
 #include "..//System/Vector2.h"
 #include "Drawable.h"
+#include "..//Core/Event.h"
+#include "..//Core/EventManager.h"
 
 namespace Mach
 {
