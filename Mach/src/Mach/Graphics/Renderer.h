@@ -13,8 +13,9 @@ namespace Mach
 		static sf::RenderWindow* m_RenderWindow;
 	protected:
 		friend class Drawable;
-	public:
+		friend class Application;
 		static void initialize(sf::RenderWindow* renderWindow);
+	public:
 		static void clear();
 		static void render(Mach::Drawable& drawable);
 		static void render(Mach::RenderGroup& renderGroup);
