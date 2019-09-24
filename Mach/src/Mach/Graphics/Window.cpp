@@ -131,6 +131,10 @@ void Mach::Window::update()
 			if (event.type == sf::Event::Closed)
 			{
 				// The window is closing
+				Mach::Event event;
+				event.type = Mach::Event::Type::Exit;
+				event.exit.code = 0;
+				EventManager::fireEvent(event);
 			}
 		}
 
