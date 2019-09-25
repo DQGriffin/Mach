@@ -26,7 +26,6 @@ void Mach::Renderer::clear()
 void Mach::Renderer::render(Mach::Drawable& drawable)
 {
 	drawable.draw(m_RenderWindow);
-	LOG_WARN << "Rendering has not yet been implemented";
 }
 
 //==========================================================================
