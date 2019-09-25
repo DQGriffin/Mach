@@ -110,7 +110,7 @@ std::string Mach::Text::getString() const
 //==========================================================================
 void Mach::Text::draw(sf::RenderWindow* window)
 {	
-	LOG_WARN << "Drawing has not yet been implemented";
+	window->draw(m_TextObject);
 }
 
 //==========================================================================
