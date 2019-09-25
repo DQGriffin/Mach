@@ -136,6 +136,12 @@ void Mach::Window::update()
 				event.exit.code = 0;
 				EventManager::fireEvent(event);
 			}
+			else if (event.type == sf::Event::Resized)
+			{
+				sf::Vector2f size = static_cast<sf::Vector2f>(m_RenderWindow.getSize());
+				sf::View view = sf::View(sf::FloatRect(0.f, 0.f, size.x, size.y));
+				m_RenderWindow.setView(view);
+			}
 		}
 
 		m_RenderWindow.draw(shape);
