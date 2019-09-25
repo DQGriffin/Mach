@@ -64,12 +64,18 @@ namespace Mach
 			int verticalDelta;
 		};
 
+		struct Resized
+		{
+			int width;
+			int height;
+		};
+
 		struct Exit
 		{
 			int code;
 		};
 	public:
-		enum class Type{KeyPressed, KeyReleased, MouseButtonPressed, MouseButtonReleased, MouseMove, Exit};
+		enum class Type{KeyPressed, KeyReleased, MouseButtonPressed, MouseButtonReleased, MouseMove, Exit, Resized};
 
 		Type type;
 
@@ -81,6 +87,7 @@ namespace Mach
 			MouseButtonReleased mouseButtonReleased;
 			MouseMove mouseMoveEvent;
 			Exit exit;
+			Resized resized;
 		};
 	};
 
