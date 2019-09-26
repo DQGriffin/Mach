@@ -141,6 +141,11 @@ void Mach::Window::update()
 				sf::Vector2f size = static_cast<sf::Vector2f>(m_RenderWindow.getSize());
 				sf::View view = sf::View(sf::FloatRect(0.f, 0.f, size.x, size.y));
 				m_RenderWindow.setView(view);
+				Mach::Event event;
+				event.type = Mach::Event::Type::Resized;
+				event.resized.width = size.x;
+				event.resized.height = size.y;
+				EventManager::fireEvent(event);
 			}
 		}
 
