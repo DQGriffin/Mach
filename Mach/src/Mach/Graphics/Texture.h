@@ -12,6 +12,7 @@ namespace Mach
 	private:
 		sf::Texture m_Texture;
 	public:
+		friend class Sprite;
 		Texture();
 		Texture(const std::string& path);
 		Texture(const Texture& other);
