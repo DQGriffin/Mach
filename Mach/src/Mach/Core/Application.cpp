@@ -15,8 +15,6 @@ Mach::Application::Application()
 	Renderer::initialize(&m_Window.m_RenderWindow);
 	inputThread = std::thread(std::bind(&InputEngine::poll, inputEngine));
 
-	consoleBuffer.push_back("Mach Console");
-
 	FontManager::add("Roboto", "dummypath");
 	done = false;
 	LOG << "Application::Application()";
@@ -78,7 +76,7 @@ void Mach::Application::updateConsole()
 {
 	ImGui::SFML::Update(m_Window.m_RenderWindow, clock.restart());
 	ImGui::Begin("Mach Console");
-	ImGui::BeginChild("Scrolling", sf::Vector2i(200, 50));
+	ImGui::BeginChild("Scrolling", sf::Vector2i(350, 150));
 	for (std::string& line : consoleBuffer)
 	{
 		ImGui::Text(line.c_str());
@@ -88,22 +86,27 @@ void Mach::Application::updateConsole()
 	ImGui::SameLine();
 	if (ImGui::Button("Go"))
 	{
-		LOG << "Console Input: " << m_ConsoleInputBuffer;		
-		Event event;
-		event.type = Event::Type::ConsoleInput;
-
-		for (unsigned int i = 0; i < 256; i++)
+		if (m_ConsoleInputBuffer[0] != 0)
 		{
-			if (m_ConsoleInputBuffer[i] != 0)
+			LOG << "Console Input: " << m_ConsoleInputBuffer;
+			Event event;
+			event.type = Event::Type::ConsoleInput;
+
+			consoleBuffer.push_back(m_ConsoleInputBuffer);
+
+			for (unsigned int i = 0; i < 256; i++)
 			{
-				event.consoleInput.input[i] = m_ConsoleInputBuffer[i];
-				event.consoleInput.input[i + 1] = 0;
+				if (m_ConsoleInputBuffer[i] != 0)
+				{
+					event.consoleInput.input[i] = m_ConsoleInputBuffer[i];
+					event.consoleInput.input[i + 1] = 0;
+				}
 			}
+			EventManager::fireEvent(event);
+
+			// Clear the console input buffet
+			memset(m_ConsoleInputBuffer, 0, sizeof(m_ConsoleInputBuffer));
 		}
-		EventManager::fireEvent(event);
-		
-		// Clear the console input buffet
-		memset(m_ConsoleInputBuffer, 0, sizeof(m_ConsoleInputBuffer));
 	}
 	ImGui::End();
 	ImGui::SFML::Render(m_Window.m_RenderWindow);
