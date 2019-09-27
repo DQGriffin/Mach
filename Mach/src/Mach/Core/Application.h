@@ -18,16 +18,23 @@
 // 2. Altered source versions must be plainly marked as such,
 //    and must not be misrepresented as being the original software.
 //
-// 3. This notice may not be removed or altered from any source distribution.
+// 3. This notice may not be removed or altered from ny source distribution.
 //
 ////////////////////////////////////////////////////////////
 
 #pragma once
-#include <thread>
-#include <functional>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include "..//MachAPI.h"
+#include "..//Graphics/FontManager.h"
 #include "..//Logging/Logger.h"
 #include "../System/InputEngine.h"
+#include "..//Graphics/Color.h"
+#include "..//Graphics/Renderer.h"
+#include "..//Graphics/Window.h"
+#include <thread>
+#include <functional>
+#include <vector>
+#include <string>
 
 namespace Mach
 {
@@ -35,9 +42,14 @@ namespace Mach
 	{
 	public:
 		bool done;
+		Mach::Window m_Window;
 	private:
+		friend class Renderer;
 		InputEngine inputEngine;
 		std::thread inputThread;
+		sf::Clock clock;
+		char m_ConsoleInputBuffer[256];
+		std::vector<std::string> consoleBuffer;
 	public:
 		Application();
 		virtual ~Application();
@@ -47,6 +59,7 @@ namespace Mach
 		bool hasEvent();
 		Mach::Event getEvent();
 		void clearEvents();
+		void updateConsole();
 	};
 
 	Application* createApplication();
