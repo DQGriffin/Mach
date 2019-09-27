@@ -70,12 +70,17 @@ namespace Mach
 			int height;
 		};
 
+		struct ConsoleInput
+		{
+			char input[256];
+		};
+
 		struct Exit
 		{
 			int code;
 		};
 	public:
-		enum class Type{KeyPressed, KeyReleased, MouseButtonPressed, MouseButtonReleased, MouseMove, Exit, Resized};
+		enum class Type{KeyPressed, KeyReleased, MouseButtonPressed, MouseButtonReleased, MouseMove, Exit, Resized, ConsoleInput};
 
 		Type type;
 
@@ -88,6 +93,7 @@ namespace Mach
 			MouseMove mouseMoveEvent;
 			Exit exit;
 			Resized resized;
+			ConsoleInput consoleInput;
 		};
 	};
 
