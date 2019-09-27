@@ -26,6 +26,8 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
+#include <ImGUI/imgui.h>
+#include <imgui-sfml/imgui-SFML.h>
 #include "..//MachAPI.h"
 #include "..//Logging/Logger.h"
 #include "..//System/Vector2.h"

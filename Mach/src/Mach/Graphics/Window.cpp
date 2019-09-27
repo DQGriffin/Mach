@@ -60,6 +60,7 @@ void Mach::Window::revalidate()
 {
 	m_RenderWindow.create(sf::VideoMode(m_Size.x, m_Size.y), m_Title);
 	m_RenderWindow.setPosition(sf::Vector2i(m_Position.x, m_Position.y));
+	ImGui::SFML::Init(m_RenderWindow);
 }
 
 //==========================================================================
@@ -126,6 +127,7 @@ void Mach::Window::update()
 	{
 		sf::Event event;
 
+		sf::Clock deltaClock;
 		while (m_RenderWindow.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
@@ -147,8 +149,13 @@ void Mach::Window::update()
 				event.resized.height = size.y;
 				EventManager::fireEvent(event);
 			}
+			ImGui::SFML::ProcessEvent(event);
 		}
-
+		ImGui::SFML::Update(m_RenderWindow, deltaClock.restart());
+		ImGui::Begin("Simple Window");
+		ImGui::Text("Mach Engine");
+		ImGui::End();
+		ImGui::SFML::Render(m_RenderWindow);
 		m_RenderWindow.draw(shape);
 	}
 }
