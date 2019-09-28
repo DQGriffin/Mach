@@ -31,6 +31,7 @@
 #include "..//Graphics/Color.h"
 #include "..//Graphics/Renderer.h"
 #include "..//Graphics/Window.h"
+#include "..//Graphics/Console.h"
 #include <thread>
 #include <functional>
 #include <vector>
