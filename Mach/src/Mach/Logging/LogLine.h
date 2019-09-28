@@ -25,6 +25,7 @@
 #pragma once
 #include "..//MachAPI.h"
 #include "Logger.h"
+#include <sstream>
 
 namespace Mach
 {
