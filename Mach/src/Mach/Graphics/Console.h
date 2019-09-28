@@ -14,6 +14,7 @@ namespace Mach
 		static void push(const char* message);
 		static void push(std::string& message);
 	protected:
+		friend class Application;
 		static void initialize(std::vector<std::string>* consoleBuffer);
 	};
 }
