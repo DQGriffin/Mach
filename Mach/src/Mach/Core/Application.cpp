@@ -19,6 +19,7 @@ Mach::Application::Application()
 	m_Window.m_RenderWindow.setFramerateLimit(60);
 
 	Renderer::initialize(&m_Window.m_RenderWindow);
+	Console::initialize(&consoleBuffer);
 	inputThread = std::thread(std::bind(&InputEngine::poll, inputEngine));
 
 	FontManager::add("Roboto", "dummypath");
@@ -110,7 +111,8 @@ void Mach::Application::updateConsole()
 				Event event;
 				event.type = Event::Type::ConsoleInput;
 
-				consoleBuffer.push_back(m_ConsoleInputBuffer);				
+				Console::push(m_ConsoleInputBuffer);
+				//consoleBuffer.push_back(m_ConsoleInputBuffer);				
 
 				for (unsigned int i = 0; i < 256; i++)
 				{
@@ -138,17 +140,59 @@ void Mach::Application::updateFrameRateDeck()
 		//ImGui::SFML::Update(m_Window.m_RenderWindow, clock.restart());
 		ImGui::SetNextWindowBgAlpha(0.85f);
 		ImGui::Begin("Performance");
-		ImGui::Text("Hello");
+		ImGui::BeginChild("fps");
 		if (ImGui::SliderInt("Max Framerate", &m_MaxFrameRate, 1, 120))
 		{
 			m_Window.m_RenderWindow.setFramerateLimit(m_MaxFrameRate);
 			m_Window.m_RenderWindow.setVerticalSyncEnabled(false);
 			m_UseVsync = false;
 		}
+		ImGui::Spacing();
+		if (ImGui::Button("1", {60, 20}))
+		{
+			m_MaxFrameRate = 1;
+			m_Window.m_RenderWindow.setFramerateLimit(m_MaxFrameRate);
+			m_Window.m_RenderWindow.setVerticalSyncEnabled(false);
+			m_UseVsync = false;
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("15", { 60, 20 }))
+		{
+			m_MaxFrameRate = 15;
+			m_Window.m_RenderWindow.setFramerateLimit(m_MaxFrameRate);
+			m_Window.m_RenderWindow.setVerticalSyncEnabled(false);
+			m_UseVsync = false;
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("30", { 60, 20 }))
+		{
+			m_MaxFrameRate = 30;
+			m_Window.m_RenderWindow.setFramerateLimit(m_MaxFrameRate);
+			m_Window.m_RenderWindow.setVerticalSyncEnabled(false);
+			m_UseVsync = false;
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("60", {60, 20}))
+		{
+			m_MaxFrameRate = 60;
+			m_Window.m_RenderWindow.setFramerateLimit(m_MaxFrameRate);
+			m_Window.m_RenderWindow.setVerticalSyncEnabled(false);
+			m_UseVsync = false;
+		}
+		ImGui::SameLine();
+		if (ImGui::Button("120", { 60, 20 }))
+		{
+			m_MaxFrameRate = 120;
+			m_Window.m_RenderWindow.setFramerateLimit(m_MaxFrameRate);
+			m_Window.m_RenderWindow.setVerticalSyncEnabled(false);
+			m_UseVsync = false;
+		}
+		ImGui::Spacing();
 		if (ImGui::Checkbox("Enable Vertical-Sync", &m_UseVsync))
 		{
 			m_Window.m_RenderWindow.setVerticalSyncEnabled(m_UseVsync);
 		}
+		ImGui::EndChild();
 		ImGui::End();
 		//ImGui::SFML::Render(m_Window.m_RenderWindow);
 	}
@@ -168,6 +212,7 @@ void Mach::Application::updateWindowSettingsDeck()
 		{
 			m_Window.setSize(m_Width, m_Height);
 		}
+		ImGui::Spacing();
 		if (ImGui::Checkbox("Fullscreen", &m_Fullscreen))
 		{
 			m_Window.setFullScreen(m_Fullscreen);
