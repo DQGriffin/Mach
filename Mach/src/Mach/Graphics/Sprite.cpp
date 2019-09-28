@@ -32,6 +32,28 @@ Mach::Sprite::Sprite(const Sprite& other)
 	update();
 }
 
+//==========================================================================
+// Set the position of the sprite
+//==========================================================================
+void Mach::Sprite::setPosition(int x, int y)
+{
+	m_Position.x = x;
+	m_Position.y = y;
+	update();	
+}
+
+//==========================================================================
+// Set the position of the sprite
+//==========================================================================
+void Mach::Sprite::setPosition(Mach::Vector2i position)
+{
+	m_Position = position;
+	update();
+}
+
+//==========================================================================
+// Update the underlying sf::Sprite
+//==========================================================================
 void Mach::Sprite::update()
 {
 	m_Sprite.setPosition(sf::Vector2f(m_Position.x, m_Position.y));
