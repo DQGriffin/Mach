@@ -50,6 +50,12 @@ namespace Mach
 		sf::Clock clock;
 		char m_ConsoleInputBuffer[256];
 		std::vector<std::string> consoleBuffer;
+		bool m_ShowConsole;
+		int m_MaxFrameRate;
+		bool m_UseVsync;
+		bool m_Fullscreen;
+		int m_Width;
+		int m_Height;
 	public:
 		Application();
 		virtual ~Application();
@@ -59,7 +65,12 @@ namespace Mach
 		bool hasEvent();
 		Mach::Event getEvent();
 		void clearEvents();
+		void updateDevTools();
 		void updateConsole();
+		void updateFrameRateDeck();
+		void updateWindowSettingsDeck();
+		void setConsoleDisplayed(bool displayed);
+		bool getConsoleDisplayed();
 	};
 
 	Application* createApplication();
