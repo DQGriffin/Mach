@@ -60,6 +60,8 @@ void Mach::Window::revalidate()
 {
 	m_RenderWindow.create(sf::VideoMode(m_Size.x, m_Size.y), m_Title);
 	m_RenderWindow.setPosition(sf::Vector2i(m_Position.x, m_Position.y));
+	m_RenderWindow.setVerticalSyncEnabled(false);
+	m_RenderWindow.setFramerateLimit(60);
 	ImGui::SFML::Init(m_RenderWindow);
 }
 
@@ -78,7 +80,8 @@ void Mach::Window::setSize(int x, int y)
 {
 	m_Size.x = x;
 	m_Size.y = y;
-	revalidate();
+	m_RenderWindow.setSize(sf::Vector2u(m_Size.x, m_Size.y));
+	//revalidate();
 }
 
 //==========================================================================
@@ -107,6 +110,47 @@ void Mach::Window::setPosition(Vector2i position)
 {
 	m_Position = position;
 	revalidate();
+}
+
+void Mach::Window::setDecorated(bool decorated)
+{
+	if (decorated)
+	{
+		
+	}
+}
+
+void Mach::Window::setFullScreen(bool fullscreen)
+{
+	std::vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
+	if (fullscreen)
+	{
+		m_RenderWindow.create(sf::VideoMode(modes[0].width, modes[0].height, modes[0].bitsPerPixel), m_Title, sf::Style::Fullscreen);
+		m_Size.x = modes[0].width;
+		m_Size.y = modes[0].height;
+	}
+	else
+	{
+		m_RenderWindow.create(sf::VideoMode(modes[modes.size() - 1].width, modes[modes.size() - 1].height, modes[modes.size() - 1].bitsPerPixel), m_Title);
+		m_Size.x = modes[modes.size() - 1].width;
+		m_Size.y = modes[modes.size() - 1].height;
+	}
+}
+
+//==========================================================================
+// Get the position of the window
+//==========================================================================
+Mach::Vector2i Mach::Window::getPosition()
+{
+	return m_Position;
+}
+
+//==========================================================================
+// Get the size of the window
+//==========================================================================
+Mach::Vector2i Mach::Window::getSize()
+{
+	return m_Size;
 }
 
 //==========================================================================
@@ -151,11 +195,11 @@ void Mach::Window::update()
 			}
 			ImGui::SFML::ProcessEvent(event);
 		}
-		ImGui::SFML::Update(m_RenderWindow, deltaClock.restart());
+		/*ImGui::SFML::Update(m_RenderWindow, deltaClock.restart());
 		ImGui::Begin("Simple Window");
 		ImGui::Text("Mach Engine");
 		ImGui::End();
-		ImGui::SFML::Render(m_RenderWindow);
+		ImGui::SFML::Render(m_RenderWindow);*/
 		m_RenderWindow.draw(shape);
 	}
 }

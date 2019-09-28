@@ -23,6 +23,7 @@
 ////////////////////////////////////////////////////////////
 
 #pragma once
+#include <vector>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
@@ -60,6 +61,10 @@ namespace Mach
 		void setSize(Vector2i size);
 		void setPosition(int x, int y);
 		void setPosition(Vector2i position);
+		void setDecorated(bool decorated);
+		void setFullScreen(bool fullscreen);
+		Mach::Vector2i getPosition();
+		Mach::Vector2i getSize();
 		void draw(Drawable& drawable);
 		void update();
 	private:
