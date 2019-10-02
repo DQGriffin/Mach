@@ -45,6 +45,7 @@ namespace Mach
 		static const Color YELLOW;		
 		static const Color ORANGE;
 		static const Color MAGENTA;
+		static const Color TRANSPARENT;
 	private:
 	public:
 		Color();

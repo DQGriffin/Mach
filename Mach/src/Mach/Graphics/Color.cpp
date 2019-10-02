@@ -8,6 +8,7 @@ const Mach::Color Mach::Color::BLUE{ 0, 0, 255 };
 const Mach::Color Mach::Color::YELLOW{ 255, 255, 0 };
 const Mach::Color Mach::Color::ORANGE{ 255, 128, 0 };
 const Mach::Color Mach::Color::MAGENTA{ 255, 0, 255 };
+const Mach::Color Mach::Color::TRANSPARENT{255, 255, 255, 0};
 
 Mach::Color::Color()
 {
