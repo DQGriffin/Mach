@@ -8,3 +8,4 @@
 #include "Mach/Graphics/Window.h"
 #include "Mach/Graphics/Texture.h"
 #include "Mach/Graphics/Sprite.h"
+#include "Mach/Graphics/Circle.h"
