@@ -50,8 +50,8 @@ namespace Mach
 		std::string m_String;
 	public:
 		Text();
-		Text(int x, int y, std::string text, Mach::Font* font, int fontSize, Mach::Color color = Mach::Color::WHITE);
-		Text(int x, int y, const char* text, Mach::Font* font, int fontSize, Mach::Color color = Mach::Color::WHITE);
+		Text(int x, int y, std::string text, Mach::Font* font, int fontSize, Mach::Color color = Mach::Color::White);
+		Text(int x, int y, const char* text, Mach::Font* font, int fontSize, Mach::Color color = Mach::Color::White);
 		void setPosition(int x, int y);
 		void setPosition(Vector2i position);
 		void setFont(Mach::Font* font);

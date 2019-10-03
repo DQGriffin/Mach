@@ -1,14 +1,14 @@
 #include "Color.h"
 
-const Mach::Color Mach::Color::WHITE{ 255, 255, 255 };
-const Mach::Color Mach::Color::BLACK{ 0, 0, 0 };
-const Mach::Color Mach::Color::RED{255, 0, 0};
-const Mach::Color Mach::Color::GREEN{ 0, 255, 0 };
-const Mach::Color Mach::Color::BLUE{ 0, 0, 255 };
-const Mach::Color Mach::Color::YELLOW{ 255, 255, 0 };
-const Mach::Color Mach::Color::ORANGE{ 255, 128, 0 };
-const Mach::Color Mach::Color::MAGENTA{ 255, 0, 255 };
-const Mach::Color Mach::Color::TRANSPARENT{255, 255, 255, 0};
+const Mach::Color Mach::Color::White{ 255, 255, 255 };
+const Mach::Color Mach::Color::Black{ 0, 0, 0 };
+const Mach::Color Mach::Color::Red{255, 0, 0};
+const Mach::Color Mach::Color::Green{ 0, 255, 0 };
+const Mach::Color Mach::Color::Blue{ 0, 0, 255 };
+const Mach::Color Mach::Color::Yellow{ 255, 255, 0 };
+const Mach::Color Mach::Color::Orange{ 255, 128, 0 };
+const Mach::Color Mach::Color::Magenta{ 255, 0, 255 };
+const Mach::Color Mach::Color::Transparent{255, 255, 255, 0};
 
 Mach::Color::Color()
 {

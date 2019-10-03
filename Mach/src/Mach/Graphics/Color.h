@@ -37,15 +37,15 @@ namespace Mach
 		int b;
 		int a;
 
-		static const Color WHITE;
-		static const Color BLACK;
-		static const Color RED;
-		static const Color GREEN;
-		static const Color BLUE;
-		static const Color YELLOW;		
-		static const Color ORANGE;
-		static const Color MAGENTA;
-		static const Color TRANSPARENT;
+		static const Color White;
+		static const Color Black;
+		static const Color Red;
+		static const Color Green;
+		static const Color Blue;
+		static const Color Yellow;		
+		static const Color Orange;
+		static const Color Magenta;
+		static const Color Transparent;
 	private:
 	public:
 		Color();
