@@ -8,8 +8,7 @@ Mach::Circle::Circle()
 	m_OutlineColor = Color::Transparent;
 	m_FillColor = Color::Transparent;
 	m_Radius = 1.0f;
-	m_OutlineThickness = 0;
-	update();
+	m_OutlineThickness = 0;	
 }
 
 //==========================================================================
@@ -24,8 +23,7 @@ Mach::Circle::Circle(const Circle& other)
 	m_FillColor = other.m_FillColor;
 	m_OutlineColor = other.m_OutlineColor;
 	m_Radius = other.m_Radius;
-	m_OutlineThickness = other.m_OutlineThickness;
-	update();
+	m_OutlineThickness = other.m_OutlineThickness;	
 }
 
 //==========================================================================
@@ -41,7 +39,6 @@ void Mach::Circle::operator=(const Circle& other)
 	m_OutlineColor = other.m_OutlineColor;
 	m_Radius = other.m_Radius;
 	m_OutlineThickness = other.m_OutlineThickness;
-	update();
 }
 
 //==========================================================================
@@ -50,7 +47,6 @@ void Mach::Circle::operator=(const Circle& other)
 void Mach::Circle::setFillColor(Mach::Color color)
 {
 	m_FillColor = color;
-	update();
 }
 
 //==========================================================================
@@ -59,7 +55,6 @@ void Mach::Circle::setFillColor(Mach::Color color)
 void Mach::Circle::setOutlineColor(Mach::Color color)
 {
 	m_OutlineColor = color;
-	update();
 }
 
 //==========================================================================
@@ -68,7 +63,6 @@ void Mach::Circle::setOutlineColor(Mach::Color color)
 void Mach::Circle::setRadius(int radius)
 {
 	m_Radius = radius;
-	update();
 }
 
 //==========================================================================
@@ -77,7 +71,6 @@ void Mach::Circle::setRadius(int radius)
 void Mach::Circle::setOutlineThickness(int outlineThickness)
 {
 	m_OutlineThickness = outlineThickness;
-	update();
 }
 
 //==========================================================================
@@ -149,6 +142,7 @@ int Mach::Circle::getOutlineThickness() const
 //==========================================================================
 void Mach::Circle::draw(sf::RenderWindow* window)
 {
+	update();
 	window->draw(m_Circle);
 }
 
